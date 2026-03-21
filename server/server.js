@@ -11,11 +11,17 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Root route for health check
+app.get("/", (req, res) => {
+    res.send("Treasure Hunt Server is Running! 🚀");
+});
+
 // Attach the teams router to the /registerTeam path
 app.use("/registerTeam", registerRouter);
 
-const PORT = process.env.BACKEND_URI || 8001;
+// Use process.env.PORT (standard for Render/Heroku) or your custom URI
+const PORT = process.env.PORT || process.env.BACKEND_URI || 8001;
 
-app.listen(PORT, ()=>{
-    console.log(`Server is running on the port : ${PORT}`);
+app.listen(PORT, () => {
+    console.log(`Server is running on port: ${PORT}`);
 });
