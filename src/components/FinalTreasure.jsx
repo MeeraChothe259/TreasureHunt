@@ -119,7 +119,7 @@ export default function FinalTreasure() {
             <h2 className="ft-title">The Final Chamber Awaits…</h2>
             <div className="ft-timer">{mins}:{secs}</div>
             <p className="ft-desc">
-              Only the top five teams survive the journey to reach the deepest treasure chamber.<br/>
+              The team that completes the journey in the least amount of time shall claim the ultimate victory.<br/>
               Here, intelligence meets pressure in a high-stakes 10-minute final challenge.<br/>
               Teams must search for hidden clue chits, connect the puzzle pieces, and decode the ultimate mystery.<br/>
               One correct solution unlocks the ancient treasure — crowning the true champions of Chakravyuh.

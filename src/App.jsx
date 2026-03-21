@@ -148,7 +148,7 @@ function App() {
         >
           <div className="title-wrapper">
             <h1 className="hero-title">Chakravyuh</h1>
-            <h2 className="hero-subtitle-glow">The Tech Treasure Hunt</h2>
+            <h2 className="hero-subtitle-glow">Break the curse, uncover the treasure</h2>
           </div>
           
           <p className="hero-description shimmer-text">

@@ -124,14 +124,14 @@ export default function Footer() {
       {/* ── Glassmorphism Content Panel ── */}
       <div className="footer-glass-panel">
         
-        <h2 className="footer-org-title">🏺 Chakravyuh — The Tech Treasure Hunt</h2>
+        <h2 className="footer-org-title">🏺 Chakravyuh — Break the curse, uncover the treasure</h2>
         <div className="footer-org-sub">Organized by CSI-CATT DMCE</div>
         
         <div className="footer-contact-box">
           <div className="fcb-head">📞 For Queries & Registrations</div>
           <div className="fcb-numbers">
-            <span className="fcb-num" onMouseEnter={playHoverSound}>📱 8453871717</span>
-            <span className="fcb-num" onMouseEnter={playHoverSound}>📱 8149787422</span>
+            <span className="fcb-num" onMouseEnter={playHoverSound}>📱 Nikhil Palvi: +91 84538 71717</span>
+            <span className="fcb-num" onMouseEnter={playHoverSound}>📱 Vedant: +91 81497 87422</span>
           </div>
         </div>
 
