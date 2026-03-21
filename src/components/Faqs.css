@@ -1,0 +1,224 @@
+/* ══════════════════════════════════════════════════════════════
+   Faqs.css — Ancient Knowledge Chamber
+═══════════════════════════════════════════════════════════════ */
+
+.faq-section {
+  position: relative;
+  width: 100vw;
+  min-height: 120vh;
+  background: radial-gradient(circle at center 80%, #1a1008 0%, #050302 100%);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 80px 20px 140px;
+  perspective: 1200px;
+  z-index: 12;
+}
+
+/* ── Background Library Walls ──────────────────────────────── */
+.faq-bg-library {
+  position: absolute;
+  inset: -15%;
+  background-image: repeating-linear-gradient(90deg, rgba(20,12,5,0.3) 0px, rgba(20,12,5,0.3) 120px, rgba(10,5,2,0.6) 120px, rgba(10,5,2,0.6) 130px);
+  z-index: 1;
+  transform: translateZ(-200px) scale(1.2);
+  pointer-events: none;
+  opacity: 0.8;
+}
+.faq-bg-library::after {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at bottom, transparent 40%, #050302 100%);
+}
+
+/* Glowing Scrolls & Ambient Dust */
+.faq-ambient { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
+.floating-scroll {
+  position: absolute;
+  font-size: 2.5rem; filter: drop-shadow(0 0 10px rgba(240,195,98,0.5)) sepia(0.8);
+  opacity: 0.15; animation: fwFloat 15s linear infinite alternate;
+}
+@keyframes fwFloat {
+  0% { transform: translateY(0) rotate(-10deg) translateZ(0); }
+  100% { transform: translateY(-80px) rotate(15deg) translateZ(80px); }
+}
+
+.faq-dust {
+  position: absolute;
+  width: 3px; height: 3px; border-radius: 50%;
+  background: #f0c362; box-shadow: 0 0 6px #f0c362;
+  animation: dustRise linear infinite;
+}
+@keyframes dustRise {
+  0% { transform: translateY(110vh) translateX(0); opacity: 0; }
+  20% { opacity: 0.6; }
+  80% { opacity: 0.3; }
+  100% { transform: translateY(-10vh) translateX(-30px); opacity: 0; }
+}
+
+/* ── Central Magical Book & Pedestal ───────────────────────── */
+.faq-pedestal-wrap {
+  position: absolute;
+  bottom: -40px; left: 50%;
+  transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center;
+  z-index: 5; pointer-events: none;
+  transition: transform 1s ease-out;
+}
+.faq-section.is-visible .faq-pedestal-wrap {
+  transform: translateX(-50%) translateY(-20px);
+}
+.pedestal-stone {
+  width: 350px; height: 80px;
+  background: linear-gradient(180deg, #2a1c11, #0a0603);
+  border-top: 4px solid rgba(240,195,98,0.3);
+  border-radius: 50% 50% 0 0;
+  box-shadow: 0 -10px 40px rgba(240,195,98,0.15);
+}
+.magic-book {
+  position: absolute; top: -50px;
+  font-size: 7rem; line-height: 1;
+  filter: drop-shadow(0 0 30px rgba(240,195,98,0.8)) sepia(0.6);
+  opacity: 0; transform: translateY(30px) scale(0.8) rotateX(20deg);
+  transition: all 1.5s cubic-bezier(0.2,1,0.3,1);
+}
+.faq-section.is-visible .magic-book {
+  opacity: 1; transform: translateY(0) scale(1) rotateX(0deg);
+}
+
+.book-glow-spread {
+  position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  width: 0; height: 100px;
+  background: radial-gradient(ellipse at bottom, rgba(240,195,98,0.6) 0%, transparent 70%);
+  border-radius: 50%; mix-blend-mode: screen; filter: blur(20px);
+  transition: width 2s cubic-bezier(0.2,0.8,0.3,1) 0.5s;
+}
+.faq-section.is-visible .book-glow-spread { width: 1200px; }
+
+/* ── Section Title ─────────────────────────────────────────── */
+.faq-header {
+  position: relative;
+  z-index: 10; text-align: center; margin-bottom: 50px;
+}
+.faq-title {
+  font-family: serif; font-size: 3.5rem; font-weight: 900;
+  text-transform: uppercase; letter-spacing: 12px;
+  color: #fff;
+  background: linear-gradient(135deg, #fff 0%, #f0c362 50%, #b8860b 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  text-shadow: 0 10px 30px rgba(240,195,98,0.4);
+  opacity: 0; transform: translateY(-30px);
+}
+.faq-section.is-visible .faq-title {
+  animation: faqTitleFade 1.2s cubic-bezier(0.2,0.8,0.2,1) 0.3s forwards;
+}
+@keyframes faqTitleFade { to { opacity:1; transform:translateY(0); } }
+
+/* ── FAQ Grid & Cards ──────────────────────────────────────── */
+.faq-grid {
+  position: relative;
+  width: 90%; max-width: 1000px;
+  display: flex; flex-direction: column; gap: 25px;
+  z-index: 10;
+}
+
+.faq-card-wrap {
+  position: relative;
+  perspective: 1200px;
+  opacity: 0; transform: translateY(40px);
+  transition: transform 0.2s;
+}
+.faq-section.is-visible .faq-card-wrap.q0 { animation: faqCardRise 0.8s cubic-bezier(0.2,1,0.3,1) 0.5s forwards; }
+.faq-section.is-visible .faq-card-wrap.q1 { animation: faqCardRise 0.8s cubic-bezier(0.2,1,0.3,1) 0.7s forwards; }
+.faq-section.is-visible .faq-card-wrap.q2 { animation: faqCardRise 0.8s cubic-bezier(0.2,1,0.3,1) 0.9s forwards; }
+.faq-section.is-visible .faq-card-wrap.q3 { animation: faqCardRise 0.8s cubic-bezier(0.2,1,0.3,1) 1.1s forwards; }
+
+@keyframes faqCardRise { to { opacity:1; transform:translateY(0); } }
+
+/* Card Body */
+.faq-card {
+  position: relative;
+  width: 100%; min-height: 100px;
+  transform-style: preserve-3d;
+  transition: transform 0.7s cubic-bezier(0.4, 1.5, 0.6, 1), box-shadow 0.3s;
+  cursor: pointer;
+  border-radius: 8px;
+}
+.faq-card-wrap:hover .faq-card {
+  box-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 20px rgba(240,195,98,0.2);
+}
+.faq-card.is-flipped {
+  transform: rotateX(180deg);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.9), 0 0 35px rgba(240,195,98,0.4);
+}
+
+/* Front & Back Faces (Parchment Style) */
+.faq-face {
+  position: absolute; inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  display: flex; align-items: center; padding: 25px 35px;
+  background: linear-gradient(135deg, #1b1208 0%, #100a04 100%);
+  border: 1px solid rgba(240,195,98,0.3);
+  border-radius: 8px;
+}
+.faq-front {
+  border-left: 4px solid #bc8b2c;
+  justify-content: space-between;
+}
+.faq-back {
+  transform: rotateX(180deg);
+  background: linear-gradient(135deg, #24180c 0%, #150c05 100%);
+  border-color: #f0c362;
+  box-shadow: inset 0 0 30px rgba(240,195,98,0.1);
+  justify-content: center; text-align: center;
+}
+
+/* Typology & Icons */
+.faq-q-text {
+  font-family: serif; font-size: 1.4rem; font-weight: 800;
+  color: #fcebc0; letter-spacing: 2px;
+  text-shadow: 0 2px 4px #000;
+}
+.faq-icon-wrap {
+  display: flex; align-items: center; gap: 20px;
+}
+.faq-icon {
+  font-size: 2.2rem; filter: drop-shadow(0 0 10px rgba(240,195,98,0.6));
+}
+.faq-q-mark {
+  font-size: 1.5rem; color: #f0c362; font-family: serif;
+  opacity: 0.6; transition: opacity 0.3s;
+}
+.faq-card-wrap:hover .faq-q-mark { opacity: 1; text-shadow: 0 0 15px #f0c362; }
+
+.faq-a-text {
+  font-family: sans-serif; font-size: 1.05rem; line-height: 1.7;
+  color: #e8d8b0; font-weight: 400; letter-spacing: 1px;
+}
+
+/* ── Interactive Ripple & Glow ─────────────────────────────── */
+.click-ripple {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  width: 0; height: 0; border-radius: 50%;
+  background: radial-gradient(circle, rgba(240,195,98,0.6) 0%, transparent 60%);
+  pointer-events: none; mix-blend-mode: screen; z-index: 20;
+}
+.ripple-active { animation: rippleSpread 0.7s ease-out forwards; }
+@keyframes rippleSpread {
+  0%{width:0;height:0;opacity:1}
+  100%{width:600px;height:600px;opacity:0}
+}
+.compass-spinner {
+  position: absolute; top: 20px; right: 30px; font-size: 1.5rem;
+  opacity: 0.3; pointer-events: none; z-index: 2;
+  transition: transform 0.5s cubic-bezier(0.2,1,0.3,1);
+}
+
+@media (max-width: 768px) {
+  .faq-title { font-size: 2.2rem; letter-spacing: 5px; }
+  .faq-face { padding: 20px; }
+  .faq-q-text { font-size: 1.1rem; }
+  .faq-icon { font-size: 1.6rem; }
+  .faq-a-text { font-size: 0.95rem; }
+}

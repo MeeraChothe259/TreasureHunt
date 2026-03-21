@@ -1,0 +1,173 @@
+/* ══════════════════════════════════════════════════════════════
+   RegistrationModal.css — Egyptian themed Registration Form
+═══════════════════════════════════════════════════════════════ */
+
+.reg-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(6, 4, 2, 0.85);
+  backdrop-filter: blur(10px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: regFadeIn 0.4s ease-out forwards;
+  padding: 20px;
+}
+
+@keyframes regFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.reg-modal {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: radial-gradient(circle at top, #1c1108 0%, #0a0603 100%);
+  border: 2px solid rgba(240,195,98,0.4);
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.9), 0 0 40px rgba(240,195,98,0.15), inset 0 0 20px rgba(240,195,98,0.1);
+  padding: 40px;
+  transform: translateY(30px) scale(0.95);
+  animation: regSlideUp 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  scrollbar-width: thin;
+  scrollbar-color: #f0c362 #1a1208;
+}
+
+.reg-modal::-webkit-scrollbar { width: 6px; }
+.reg-modal::-webkit-scrollbar-thumb { background: #f0c362; border-radius: 4px; }
+
+@keyframes regSlideUp {
+  to { transform: translateY(0) scale(1); }
+}
+
+.reg-close {
+  position: absolute;
+  top: 15px; right: 20px;
+  background: none; border: none;
+  font-size: 2rem; color: #f0c362;
+  cursor: pointer; opacity: 0.6;
+  transition: all 0.3s;
+}
+.reg-close:hover { opacity: 1; transform: scale(1.1) rotate(90deg); text-shadow: 0 0 10px #f0c362; }
+
+.reg-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.reg-title {
+  font-family: serif;
+  font-size: 2.2rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  color: #fff;
+  background: linear-gradient(135deg, #fff 0%, #f0c362 50%, #8a6300 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 4px 15px rgba(240,195,98,0.4);
+  margin: 0 0 10px 0;
+}
+
+.live-count {
+  display: inline-block;
+  padding: 6px 16px;
+  background: rgba(240,195,98,0.1);
+  border-radius: 20px;
+  border: 1px solid rgba(240,195,98,0.3);
+  font-family: monospace;
+  font-size: 0.95rem;
+  color: #fcebc0;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  box-shadow: 0 0 15px rgba(240,195,98,0.2);
+  animation: countPulse 2s infinite alternate;
+}
+.live-count span { color: #f0c362; font-weight: bold; font-size: 1.1rem; }
+
+@keyframes countPulse {
+  0% { box-shadow: 0 0 5px rgba(240,195,98,0.1); }
+  100% { box-shadow: 0 0 20px rgba(240,195,98,0.4); }
+}
+
+.reg-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.input-group label {
+  font-family: sans-serif;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: rgba(240,195,98,0.8);
+}
+
+.reg-input {
+  width: 100%;
+  padding: 12px 14px;
+  background: rgba(0,0,0,0.4);
+  border: 1px solid rgba(240,195,98,0.2);
+  border-radius: 6px;
+  color: #fff;
+  font-family: sans-serif;
+  font-size: 1rem;
+  transition: all 0.3s;
+}
+.reg-input:focus {
+  outline: none;
+  border-color: #f0c362;
+  box-shadow: 0 0 15px rgba(240,195,98,0.2), inset 0 0 10px rgba(240,195,98,0.1);
+  background: rgba(20,12,5,0.8);
+}
+.reg-input::placeholder {
+  color: rgba(255,255,255,0.2);
+}
+
+.members-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.reg-submit-btn {
+  margin-top: 15px;
+  padding: 16px;
+  width: 100%;
+  background: linear-gradient(90deg, #b8860b 0%, #f0c362 50%, #b8860b 100%);
+  background-size: 200% auto;
+  border: none;
+  border-radius: 6px;
+  color: #060402;
+  font-family: serif;
+  font-size: 1.2rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  cursor: pointer;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.5), 0 0 20px rgba(240,195,98,0.6);
+  transition: all 0.4s;
+}
+.reg-submit-btn:hover {
+  background-position: right center;
+  transform: translateY(-3px);
+  box-shadow: 0 15px 25px rgba(0,0,0,0.6), 0 0 35px rgba(240,195,98,0.9);
+}
+
+@media (max-width: 600px) {
+  .members-grid { grid-template-columns: 1fr; gap: 10px; }
+  .reg-modal { padding: 30px 20px; }
+  .reg-title { font-size: 1.8rem; }
+}

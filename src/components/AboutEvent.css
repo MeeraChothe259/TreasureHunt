@@ -1,0 +1,569 @@
+/* ============================================================
+   AboutEvent.css — Premium Cinematic Egyptian Pyramid Experience
+   ============================================================ */
+
+/* ─── Section Shell ─────────────────────────────────────────── */
+.about-section {
+  position: relative;
+  width: 100vw;
+  min-height: 150vh;
+  background: var(--dark-bg);
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 5;
+}
+
+/* ─── Background ─────────────────────────────────────────────── */
+.about-bg {
+  position: absolute;
+  inset: 0;
+  transition: all 3s ease-in-out;
+  z-index: 0;
+}
+
+.about-bg.dark-sand {
+  background: radial-gradient(circle at center, #1a1614 0%, #0a0808 100%);
+}
+
+.about-bg.corridor-glow {
+  background:
+    radial-gradient(ellipse at 50% 30%, rgba(240,195,98,0.07) 0%, transparent 55%),
+    radial-gradient(circle at center, #352110 0%, #0d0805 65%, #000 100%);
+}
+
+/* ─── Stone Doors ────────────────────────────────────────────── */
+.door-container {
+  position: absolute;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  pointer-events: none;
+}
+
+.stone-door {
+  width: 50%;
+  height: 100%;
+  background:
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="4" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23n)" opacity="0.12"/></svg>'),
+    linear-gradient(180deg, #1c1410 0%, #111 50%, #0a0808 100%);
+  border: 4px solid #000;
+  box-shadow: inset 0 0 60px rgba(0,0,0,0.9);
+  transition: transform 2.8s cubic-bezier(0.7, 0, 0.2, 1) 1.2s;
+  position: relative;
+}
+
+/* Door rune lines */
+.stone-door::before {
+  content: '';
+  position: absolute;
+  inset: 12px;
+  border: 1px solid rgba(240,195,98,0.08);
+  pointer-events: none;
+}
+
+.stone-door.left-door {
+  border-right: 3px solid rgba(240,195,98,0.15);
+  transform-origin: left;
+}
+
+.stone-door.right-door {
+  border-left: 3px solid rgba(240,195,98,0.15);
+  transform-origin: right;
+}
+
+.rumble { animation: rumble 1.2s ease-in-out; }
+
+@keyframes rumble {
+  0%,100%  { transform: translateX(0); }
+  15%,45%,75% { transform: translateX(-4px) translateY(-2px); }
+  30%,60%,90% { transform: translateX( 4px) translateY( 2px); }
+}
+
+.is-open .left-door  { transform: translateX(-100%); }
+.is-open .right-door { transform: translateX(100%); }
+
+/* ─── Pyramid Interior ───────────────────────────────────────── */
+.pyramid-interior {
+  position: relative;
+  z-index: 50;
+  width: 100%;
+  max-width: 1280px;
+  padding: 60px 30px;
+  opacity: 0;
+  transition: opacity 2s ease 2.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pyramid-interior.visible { opacity: 1; }
+
+/* ─── Torches ────────────────────────────────────────────────── */
+.torch {
+  position: absolute;
+  top: 18%;
+  width: 14px;
+  height: 55px;
+  background: linear-gradient(180deg, #5a3218, #1a0f05);
+  border-radius: 4px;
+  box-shadow: 2px 2px 12px #000;
+}
+
+.torch.left  { left:  4%; transform: rotate(-4deg); }
+.torch.right { right: 4%; transform: rotate( 4deg); }
+
+.flame {
+  position: absolute;
+  top: -38px;
+  left: -13px;
+  width: 40px;
+  height: 48px;
+  background: radial-gradient(ellipse at bottom, #ffd54f 10%, #ff7043 50%, transparent 100%);
+  border-radius: 50% 50% 20% 20%;
+  filter: blur(3px);
+  animation: flicker 0.12s infinite alternate;
+  box-shadow: 0 0 40px 16px rgba(255,112,34,0.35);
+}
+
+@keyframes flicker {
+  0%   { transform: scale(1)   rotate(-2deg); opacity: 0.88; height: 48px; }
+  100% { transform: scale(1.1) rotate( 2deg); opacity: 1;    height: 54px; }
+}
+
+/* ─── Glass Card ─────────────────────────────────────────────── */
+.glass-card {
+  background: rgba(20, 14, 10, 0.72);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(240,195,98,0.25);
+  border-radius: 16px;
+  padding: 56px 60px;
+  box-shadow:
+    0 32px 64px rgba(0,0,0,0.85),
+    0  0  1px rgba(240,195,98,0.15),
+    inset 0 0 30px rgba(240,195,98,0.04);
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+/* Sweeping light streak */
+.glass-card::before {
+  content: '';
+  position: absolute;
+  top: -60%;
+  left: -60%;
+  width: 220%;
+  height: 220%;
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgba(240,195,98,0.07) 50%,
+    transparent 70%
+  );
+  transform: rotate(45deg) translateX(-100%);
+  animation: lightStreak 7s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes lightStreak {
+  0%   { transform: rotate(45deg) translateX(-100%); }
+  100% { transform: rotate(45deg) translateX(220%); }
+}
+
+/* Gold corner accents */
+.glass-card::after {
+  content: '';
+  position: absolute;
+  top: 10px; left: 10px;
+  width: 30px; height: 30px;
+  border-top: 2px solid rgba(240,195,98,0.5);
+  border-left: 2px solid rgba(240,195,98,0.5);
+  border-radius: 3px 0 0 0;
+  pointer-events: none;
+}
+
+/* ─── About Title — Typewriter ───────────────────────────────── */
+.about-title {
+  font-family: var(--font-heading);
+  font-size: 3.2rem;
+  color: var(--gold-primary);
+  margin-bottom: 36px;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 3px solid var(--gold-primary);
+  width: 0;
+  text-shadow: 0 0 20px var(--gold-glow), 0 0 40px rgba(240,195,98,0.2);
+}
+
+.typewrite-anim {
+  animation:
+    typing    2s steps(40, end) 1s forwards,
+    blink-caret 0.8s step-end infinite;
+}
+
+@keyframes typing       { from { width: 0 } to { width: 100% } }
+@keyframes blink-caret  {
+  from, to { border-color: transparent }
+  50%      { border-color: var(--gold-primary); }
+}
+
+/* ─── Content Split ──────────────────────────────────────────── */
+.content-split {
+  display: flex;
+  gap: 48px;
+  align-items: center;
+  margin-bottom: 52px;
+}
+
+.text-content { flex: 1.1; }
+
+/* Text paragraphs */
+.text-content p {
+  font-size: 1.2rem;
+  line-height: 1.9;
+  color: #cfc4ae;
+  margin-bottom: 18px;
+  opacity: 0;
+  transform: translateY(22px);
+}
+
+.visible .glow-entrance.delay-1 { animation: textReveal 0.9s cubic-bezier(0.4,0,0.2,1) 1.5s forwards; }
+.visible .glow-entrance.delay-2 { animation: textReveal 0.9s cubic-bezier(0.4,0,0.2,1) 1.8s forwards; }
+.visible .glow-entrance.delay-3 { animation: textReveal 0.9s cubic-bezier(0.4,0,0.2,1) 2.1s forwards; }
+.visible .glow-entrance.delay-4 { animation: textReveal 0.9s cubic-bezier(0.4,0,0.2,1) 2.4s forwards; }
+
+@keyframes textReveal {
+  0%   { opacity: 0; transform: translateY(22px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Image side */
+.image-content {
+  flex: 0.9;
+  position: relative;
+  opacity: 0;
+  transform: scale(0.92) translateX(20px);
+}
+
+.visible .reveal-image {
+  animation: imageReveal 1.2s ease-out 1.2s forwards;
+}
+
+@keyframes imageReveal {
+  0%   { opacity: 0; transform: scale(0.92) translateX(20px); }
+  100% { opacity: 1; transform: scale(1)   translateX(0); }
+}
+
+.pyramid-image {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid rgba(240,195,98,0.25);
+  box-shadow:
+    0 16px 40px rgba(0,0,0,0.8),
+    0  0  20px rgba(240,195,98,0.08);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.pyramid-image:hover {
+  transform: scale(1.03) rotateY(4deg);
+  box-shadow:
+    0 24px 56px rgba(0,0,0,0.9),
+    0  0  30px rgba(240,195,98,0.2);
+}
+
+/* ─── LEVELS SECTION — Full Upgrade ─────────────────────────── */
+.levels-section {
+  width: 100%;
+  margin-top: 60px;
+}
+
+.levels-heading {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: rgba(240,195,98,0.6);
+  margin-bottom: 40px;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: none;
+}
+
+.visible .levels-heading {
+  animation: textReveal 0.8s ease-out 3s forwards;
+}
+
+/* ─── Level grid ────────────────────────────────────────────── */
+.level-path {
+  position: relative;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  padding: 0 4px;
+  align-items: start;
+}
+
+/* Connecting dashed spine */
+.path-line {
+  position: absolute;
+  top: 35px;
+  left: 10%;
+  right: 10%;
+  height: 2px;
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(240,195,98,0.15) 0px,
+    rgba(240,195,98,0.15) 6px,
+    transparent 6px,
+    transparent 14px
+  );
+  z-index: 1;
+}
+
+.path-fill {
+  position: absolute;
+  top: 35px;
+  left: 10%;
+  height: 2px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--gold-dark), var(--gold-primary));
+  box-shadow: 0 0 10px var(--gold-primary), 0 0 22px var(--gold-glow);
+  z-index: 2;
+  border-radius: 2px;
+}
+
+.visible .path-fill {
+  animation: pathGrow 2.5s cubic-bezier(0.4,0,0.2,1) 3s forwards;
+}
+
+@keyframes pathGrow {
+  to { width: 80%; }
+}
+
+/* ─── Level Card ─────────────────────────────────────────────── */
+.level-card {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  opacity: 0;
+  transform: translateY(28px) scale(0.9);
+  cursor: default;
+  /* prevent shrinking below min content width */
+  min-width: 0;
+}
+
+/* path-line=child1, path-fill=child2 → level cards start at child 3 */
+.visible .level-card:nth-child(3) { animation: cardReveal 0.7s cubic-bezier(0.34,1.56,0.64,1) 3.2s  forwards; }
+.visible .level-card:nth-child(4) { animation: cardReveal 0.7s cubic-bezier(0.34,1.56,0.64,1) 3.5s forwards; }
+.visible .level-card:nth-child(5) { animation: cardReveal 0.7s cubic-bezier(0.34,1.56,0.64,1) 3.8s  forwards; }
+.visible .level-card:nth-child(6) { animation: cardReveal 0.7s cubic-bezier(0.34,1.56,0.64,1) 4.1s forwards; }
+.visible .level-card:nth-child(7) { animation: cardReveal 0.7s cubic-bezier(0.34,1.56,0.64,1) 4.4s  forwards; }
+
+@keyframes cardReveal {
+  0%   { opacity: 0; transform: translateY(28px) scale(0.9); }
+  100% { opacity: 1; transform: translateY(0)    scale(1);   }
+}
+
+/* ─── Orbit Badge (the circle with number) ───────────────────── */
+.level-badge {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;
+}
+
+.badge-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid rgba(240,195,98,0.2);
+  animation: badgeSpin 12s linear infinite;
+}
+
+.badge-ring::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 6px;
+  background: var(--gold-primary);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--gold-primary);
+}
+
+@keyframes badgeSpin { to { transform: rotate(360deg); } }
+
+.badge-inner {
+  position: absolute;
+  inset: 7px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #2a1c0e, #100c06);
+  border: 2px solid rgba(240,195,98,0.35);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1px;
+  box-shadow:
+    0 0 0 1px rgba(0,0,0,0.6),
+    0 6px 20px rgba(0,0,0,0.7);
+  transition: all 0.35s ease;
+}
+
+.badge-num {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: var(--gold-primary);
+  line-height: 1;
+  text-shadow: 0 0 10px var(--gold-glow);
+}
+
+.badge-icon {
+  font-size: 0.72rem;
+  line-height: 1;
+}
+
+/* Hover — lift the whole card */
+.level-card:hover .badge-inner {
+  background: radial-gradient(circle, #3d2710, #1a0f05);
+  border-color: var(--gold-primary);
+  box-shadow:
+    0 0 0 1px rgba(0,0,0,0.6),
+    0 0 24px var(--gold-glow),
+    0 0 48px rgba(240,195,98,0.12),
+    inset 0 0 12px rgba(240,195,98,0.08);
+}
+
+.level-card:hover { transform: translateY(-6px) scale(1.04); transition: transform 0.35s ease; }
+
+/* ─── Level Info Pill ────────────────────────────────────────── */
+.level-info {
+  background: rgba(15,10,6,0.7);
+  border: 1px solid rgba(240,195,98,0.16);
+  border-radius: 10px;
+  padding: 10px 8px;
+  width: 100%;
+  min-height: 80px;
+  text-align: center;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+  transition: border-color 0.35s, box-shadow 0.35s;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  justify-content: center;
+}
+
+.level-card:hover .level-info {
+  border-color: rgba(240,195,98,0.4);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.7), 0 0 16px rgba(240,195,98,0.06);
+}
+
+.level-label {
+  font-family: var(--font-heading);
+  font-size: 0.55rem;
+  letter-spacing: 2px;
+  color: rgba(240,195,98,0.45);
+  text-transform: uppercase;
+}
+
+.level-name {
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--gold-primary);
+  letter-spacing: 0.5px;
+  line-height: 1.3;
+  text-shadow: 0 0 8px rgba(240,195,98,0.3);
+}
+
+.level-desc {
+  font-size: 0.62rem;
+  color: rgba(200,185,160,0.65);
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+/* ─── Media Queries for levels ──────────────────────────────── */
+@media (max-width: 900px) {
+  .level-path {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  .path-line, .path-fill { display: none; }
+}
+
+@media (max-width: 560px) {
+  .level-path {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+}
+
+/* ─── Floating Clue Icons ────────────────────────────────────── */
+.floating-clue {
+  position: absolute;
+  font-size: 2rem;
+  opacity: 0.35;
+  filter: drop-shadow(0 0 10px var(--gold-glow));
+  pointer-events: none;
+  z-index: 40;
+}
+
+/* ─── Scarab Beetle ──────────────────────────────────────────── */
+.scarab-beetle {
+  position: absolute;
+  bottom: -20px;
+  left: 0;
+  font-size: 1.5rem;
+  opacity: 0;
+  transform: rotate(90deg);
+  z-index: 40;
+}
+
+.visible .scarab-beetle {
+  animation: scarabCrawl 6s linear 4.5s forwards;
+}
+
+@keyframes scarabCrawl {
+  0%   { opacity: 0;   left: -5%;  bottom: 10%; transform: rotate(45deg); }
+  10%  { opacity: 0.8;             bottom: 10%; transform: rotate(45deg); }
+  45%  { bottom: 40%;  left: 30%;              transform: rotate(45deg); }
+  50%  { transform: rotate(0deg); }
+  90%  { opacity: 0.8; }
+  100% { opacity: 0;   left: 105%; bottom: 40%; transform: rotate(0deg); }
+}
+
+/* ─── Media Queries ──────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .content-split { flex-direction: column; }
+  .about-title    { font-size: 2.2rem; letter-spacing: 3px; }
+  .text-content p { font-size: 1.05rem; }
+  .glass-card     { padding: 36px 28px; }
+
+  .level-path { flex-wrap: wrap; gap: 20px; }
+  .path-line, .path-fill { display: none; }
+  .level-sep  { display: none; }
+  .level-card { flex: 0 0 calc(50% - 12px); }
+}
+
+@media (max-width: 560px) {
+  .about-title    { font-size: 1.6rem; }
+  .glass-card     { padding: 28px 18px; }
+  .level-card     { flex: 0 0 100%; }
+  .levels-heading { font-size: 1rem; }
+}

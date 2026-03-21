@@ -1,0 +1,182 @@
+/* ══════════════════════════════════════════════════════════════
+   Footer.css — Cinematic Resolution
+═══════════════════════════════════════════════════════════════ */
+
+.footer-section {
+  position: relative;
+  width: 100vw;
+  min-height: 90vh;
+  /* Deep indigo to dark brown horizon night sky */
+  background: linear-gradient(180deg, #090a10 0%, #151025 50%, #1c0e08 100%);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px;
+  z-index: 10;
+  perspective: 1200px;
+}
+
+/* ── Night Sky Elements ────────────────────────────────────── */
+.footer-stars {
+  position: absolute; inset: 0; z-index: 1;
+  pointer-events: none;
+}
+.footer-star {
+  position: absolute; border-radius: 50%; background: #fff;
+  animation: starTwinkle alternate infinite;
+}
+@keyframes starTwinkle { 0%{opacity:0.2; transform:scale(0.8)} 100%{opacity:1; transform:scale(1.2); box-shadow: 0 0 8px #fff;} }
+
+.footer-shooting-star {
+  position: absolute; top: -10%; right: -10%;
+  width: 150px; height: 2px;
+  background: linear-gradient(-45deg, #fff, transparent);
+  filter: drop-shadow(0 0 5px #fff);
+  transform: rotate(-35deg);
+  animation: shootingStar 12s linear infinite;
+  z-index: 2; opacity: 0;
+}
+@keyframes shootingStar {
+  0%, 80% { transform: translate(0, 0) rotate(-35deg); opacity: 0; }
+  82% { opacity: 1; }
+  85% { transform: translate(-150vw, 150vh) rotate(-35deg); opacity: 0; }
+  100% { opacity: 0; }
+}
+
+.footer-moon {
+  position: absolute; top: 15%; right: 25%;
+  width: 180px; height: 180px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #fff 0%, #fdf5d3 30%, #a69871 100%);
+  box-shadow: 0 0 80px rgba(253, 245, 211, 0.3), 0 0 150px rgba(253, 245, 211, 0.1);
+  animation: moonGlow 6s infinite alternate;
+  z-index: 2;
+}
+@keyframes moonGlow {
+  0% { box-shadow: 0 0 60px rgba(253, 245, 211, 0.2); transform: scale(0.98); }
+  100% { box-shadow: 0 0 90px rgba(253, 245, 211, 0.4), 0 0 160px rgba(253, 245, 211, 0.2); transform: scale(1.02); }
+}
+
+.footer-clouds {
+  position: absolute; top: 20%; right: 10%; width: 500px; height: 150px;
+  background: radial-gradient(ellipse, rgba(20,20,30,0.5), transparent 70%);
+  filter: blur(25px); z-index: 3;
+  animation: cloudDrift 40s linear infinite alternate;
+}
+@keyframes cloudDrift { 0%{transform: translateX(0)} 100%{transform: translateX(-300px)} }
+
+/* ── Pyramids & Dunes ──────────────────────────────────────── */
+.footer-pyramids {
+  position: absolute; bottom: 20%; left: 0; width: 100%; height: 300px;
+  z-index: 3; pointer-events: none;
+}
+.pyramid-silhouette {
+  position: absolute; bottom: 0;
+  border-bottom: 300px solid #0d080c;
+}
+.pyramid-silhouette.p1 { left: 10%; border-left: 200px solid transparent; border-right: 200px solid transparent; filter: drop-shadow(0 -10px 30px rgba(0,0,0,0.6)); z-index: 2; }
+.pyramid-silhouette.p2 { left: 25%; border-bottom: 220px solid #080508; border-left: 150px solid transparent; border-right: 150px solid transparent; z-index: 1; }
+.pyramid-silhouette.p3 { right: 15%; border-bottom: 180px solid #070407; border-left: 120px solid transparent; border-right: 120px solid transparent; }
+
+.footer-dunes {
+  position: absolute; bottom: 0; left: 0; width: 100%; height: 35%;
+  background: linear-gradient(180deg, transparent 0%, #060301 40%, #030100 100%);
+  z-index: 4; pointer-events: none;
+}
+.sand-trail-glow {
+  position: absolute; bottom: 0; left: 50%; width: 200px; height: 100%;
+  transform: translateX(-50%) perspective(400px) rotateX(60deg);
+  background: radial-gradient(ellipse at center, rgba(240,195,98,0.1) 0%, transparent 60%);
+  z-index: 5;
+}
+
+/* ── Floating Sand Particles (Interactive) ─────────────────── */
+.footer-particle-layer { position: absolute; inset: 0; z-index: 6; pointer-events: none; }
+.fps-particle {
+  position: absolute; border-radius: 50%;
+  background: rgba(240,195,98,0.8); box-shadow: 0 0 5px rgba(240,195,98,0.5);
+  transition: transform 0.3s ease-out; /* For mouse chase */
+}
+
+/* ── Glassmorphism Panel ───────────────────────────────────── */
+.footer-glass-panel {
+  position: relative;
+  z-index: 10;
+  background: rgba(12, 6, 4, 0.5);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(240, 195, 98, 0.25);
+  border-top: 2px solid rgba(240, 195, 98, 0.5);
+  border-radius: 20px;
+  padding: 50px 70px;
+  text-align: center;
+  max-width: 800px;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.9), inset 0 0 40px rgba(240, 195, 98, 0.05);
+  opacity: 0; transform: translateY(50px) scale(0.95);
+}
+.footer-section.is-visible .footer-glass-panel {
+  animation: footerPanelRise 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+@keyframes footerPanelRise { to { opacity: 1; transform: translateY(0) scale(1); } }
+
+/* ── Content Elements ──────────────────────────────────────── */
+.footer-org-title {
+  font-family: serif; font-size: 2.2rem; font-weight: 800;
+  text-transform: uppercase; letter-spacing: 6px;
+  background: linear-gradient(90deg, #fff 0%, #f0c362 50%, #fff 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  text-shadow: 0 4px 15px rgba(240,195,98,0.3);
+  margin-bottom: 5px;
+}
+.footer-org-sub {
+  font-family: sans-serif; font-size: 1rem; color: #a69871;
+  letter-spacing: 4px; text-transform: uppercase; margin-bottom: 40px;
+}
+
+.footer-contact-box {
+  display: inline-block; padding: 20px 40px;
+  background: rgba(0,0,0,0.4); border-radius: 12px;
+  border: 1px solid rgba(240,195,98,0.1);
+  margin-bottom: 40px;
+}
+.fcb-head { font-family: sans-serif; font-size: 0.9rem; color: #8a6300; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 15px; }
+.fcb-numbers { display: flex; flex-direction: column; gap: 10px; }
+.fcb-num { 
+  font-family: monospace; font-size: 1.4rem; color: #e8d8b0; 
+  letter-spacing: 3px; display: flex; align-items: center; justify-content: center; gap: 10px;
+  transition: all 0.3s; cursor: pointer;
+}
+.fcb-num:hover { color: #f0c362; text-shadow: 0 0 10px rgba(240,195,98,0.6); transform: scale(1.05); }
+
+.footer-quote {
+  font-family: serif; font-size: 1.3rem; font-style: italic; color: #cfbf93;
+  letter-spacing: 1.5px; line-height: 1.6;
+  text-shadow: 0 2px 5px #000;
+}
+
+/* ── Icons & Micro-interactions ───────────────────────────── */
+.footer-compass {
+  position: absolute; bottom: 20px; right: 20px;
+  font-size: 2rem; opacity: 0.5; color: #f0c362;
+  transition: transform 1s cubic-bezier(0.2, 1, 0.3, 1);
+}
+.footer-section.is-visible .footer-compass { transform: rotate(360deg); }
+
+.footer-hieroglyphs {
+  position: absolute; inset: 0; z-index: 15; pointer-events: none;
+}
+.fh-sym {
+  position: absolute; font-size: 1.5rem; color: rgba(240,195,98,0.15);
+  animation: symbolBreathe 6s infinite alternate;
+}
+@keyframes symbolBreathe { 0%{opacity:0.2; filter:blur(2px)} 100%{opacity:0.5; filter:blur(0px); text-shadow:0 0 10px rgba(240,195,98,0.4)} }
+
+@media (max-width: 600px) {
+  .footer-glass-panel { padding: 40px 20px; }
+  .footer-org-title { font-size: 1.6rem; letter-spacing: 3px; }
+  .fcb-num { font-size: 1.1rem; }
+  .footer-quote { font-size: 1.1rem; }
+  .footer-moon { width: 100px; height: 100px; top: 10%; right: 10%; }
+  .pyramid-silhouette.p1 { border-left: 100px solid transparent; border-right: 100px solid transparent; border-bottom: 200px solid #0d080c; }
+}
