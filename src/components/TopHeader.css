@@ -148,9 +148,9 @@
   .college-name {
     font-size: 0.95rem;
     letter-spacing: 1px;
-    background: #fff;
+    background: transparent;
     -webkit-text-fill-color: #fff;
-    background-clip: initial;
+    color: #fff;
     line-height: 1.1;
   }
   .department-name {
