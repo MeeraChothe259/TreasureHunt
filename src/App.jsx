@@ -8,6 +8,7 @@ import Faqs from './components/Faqs';
 import FinalTreasure from './components/FinalTreasure';
 import Footer from './components/Footer';
 import RegistrationModal from './components/RegistrationModal';
+import TopHeader from './components/TopHeader';
 import { playAmbientDrone, playClickSound, initAudio, playBoomSound } from './utils/audioSystem';
 
 const SandParticles = () => {
@@ -121,6 +122,7 @@ function App() {
   return (
     <div className="app-wrapper" onClick={handleAppInteraction}>
       <div className="hero-container" onMouseMove={handleMouseMove} ref={containerRef}>
+        <TopHeader />
         {/* Background with parallax effect reacting to mouse */}
         <img 
           src="/pharaoh-bg.png" 
