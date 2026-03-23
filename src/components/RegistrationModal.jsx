@@ -28,8 +28,11 @@ export default function RegistrationModal({ onClose }) {
     setIsSubmitting(true);
     playLevelActivate();
     
+    // Use environment variable for API URL, fallback to localhost for development
+    const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5053';
+    
     try {
-      const response = await fetch('http://localhost:5053/registerTeam', {
+      const response = await fetch(`${API_BASE_URL}/registerTeam`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
@@ -41,7 +44,14 @@ export default function RegistrationModal({ onClose }) {
         alert('Alliance formed! Your team has been registered for Chakravyuh.');
         onClose();
       } else {
-        alert('Registration failed: ' + (result.error || 'Unknown error'));
+        // Handle specific database errors for a better user experience
+        let errorMessage = result.error || 'Unknown error';
+        if (errorMessage.includes('duplicate key value violates unique constraint') && 
+            errorMessage.includes('registrations_team_name_key')) {
+          errorMessage = 'This team name is already taken. Please choose a different one.';
+        }
+        
+        alert('Registration failed: ' + errorMessage);
       }
     } catch (err) {
       console.error("Fetch error:", err);
