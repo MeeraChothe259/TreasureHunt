@@ -7,6 +7,7 @@ export default function RegistrationModal({ onClose }) {
   const [showPayment, setShowPayment] = useState(false);
   const [formData, setFormData] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isRegistered, setIsRegistered] = useState(false);
 
   const handleNextToPayment = (e) => {
     e.preventDefault();
@@ -28,7 +29,6 @@ export default function RegistrationModal({ onClose }) {
     setIsSubmitting(true);
     playLevelActivate();
     
-    // Use environment variable for API URL, fallback to localhost for development
     const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5053';
     
     try {
@@ -41,16 +41,13 @@ export default function RegistrationModal({ onClose }) {
       const result = await response.json();
       
       if (response.ok) {
-        alert('Alliance formed! Your team has been registered for Chakravyuh.');
-        onClose();
+        setIsRegistered(true);
       } else {
-        // Handle specific database errors for a better user experience
         let errorMessage = result.error || 'Unknown error';
         if (errorMessage.includes('duplicate key value violates unique constraint') && 
             errorMessage.includes('registrations_team_name_key')) {
           errorMessage = 'This team name is already taken. Please choose a different one.';
         }
-        
         alert('Registration failed: ' + errorMessage);
       }
     } catch (err) {
@@ -117,6 +114,36 @@ export default function RegistrationModal({ onClose }) {
               </button>
             </form>
           </>
+        ) : isRegistered ? (
+          <div className="success-step">
+            <div className="reg-header">
+              <h2 className="reg-title">Pact Sealed!</h2>
+            </div>
+            
+            <div className="success-content">
+              <div className="success-icon">✨</div>
+              <p className="success-message">
+                Your team has been registered! 
+              </p>
+              <p className="success-note">
+                To finalize, click the button below to send your payment screenshot to Vedant on WhatsApp.
+              </p>
+
+              <a 
+                href={`https://wa.me/918149787422?text=Hi%20Vedant!%20I've%20just%20registered%20the%20team%20"${formData?.team_name}"%20for%20Chakravyuh.%20Here%20is%20my%20payment%20screenshot.`}
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="whatsapp-btn"
+                onClick={handleClick}
+              >
+                Send Screenshot on WhatsApp 📱
+              </a>
+
+              <button className="reg-submit-btn secondary-btn" onClick={onClose} style={{ marginTop: '20px' }}>
+                Close
+              </button>
+            </div>
+          </div>
         ) : (
           <div className="payment-step">
             <div className="reg-header">
